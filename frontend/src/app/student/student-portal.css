@@ -1,0 +1,30 @@
+.student-portal{min-height:100vh;background:#f6f8fc;color:#0f172a;padding:clamp(20px,4vw,52px);font-family:inherit}
+.student-portal *{box-sizing:border-box}
+.student-portal h1{font-size:clamp(25px,3vw,34px);line-height:1.25;margin:8px 0 10px;font-weight:750}
+.student-portal h2{font-size:19px;margin:0 0 12px}
+.student-portal p{line-height:1.6}
+.student-kicker{font-size:12px;font-weight:750;letter-spacing:.08em;color:#2563eb;margin:0}
+.student-panel{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;box-shadow:0 4px 18px rgba(15,23,42,.04)}
+.student-login-page{display:flex;justify-content:center;align-items:center}
+.student-login-panel{width:min(100%,460px)}
+.student-form{display:grid;gap:18px;margin:26px 0}
+.student-form label{font-size:14px;font-weight:650;display:grid;gap:7px}
+.student-form input{font:inherit;font-size:15px;border:1px solid #cbd5e1;padding:13px 14px;border-radius:10px;width:100%;color:#0f172a;background:#fff}
+.student-form input:focus{outline:2px solid #93c5fd;outline-offset:2px}
+.student-portal button{background:#2563eb;color:#fff;border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:650;cursor:pointer}
+.student-portal button:disabled{opacity:.65;cursor:wait}
+.student-error{color:#b91c1c;background:#fef2f2;padding:10px 12px;border-radius:8px}
+.student-note,.student-desc{color:#64748b;font-size:13px}
+.student-header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:24px}
+.student-header p:not(.student-kicker){color:#64748b;margin:0}
+.student-portal .student-logout{background:#e2e8f0;color:#0f172a;white-space:nowrap}
+.student-notice{background:#eff6ff;color:#1e40af;padding:14px 18px;border-radius:12px;margin:22px 0}
+.student-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:22px}
+.student-kpi p{color:#64748b;font-size:13px;margin:0 0 10px}
+.student-kpi strong{font-size:24px;line-height:1.25}
+.student-table-wrap{overflow-x:auto}
+.student-portal table{border-collapse:collapse;width:100%;font-size:13px;min-width:700px}
+.student-portal th,.student-portal td{padding:13px 11px;text-align:left;border-bottom:1px solid #e2e8f0}
+.student-portal th{background:#f8fafc;color:#475569}
+@media(max-width:900px){.student-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.student-kpi-grid{grid-template-columns:1fr}.student-header{display:block}.student-portal .student-logout{margin-top:16px}}

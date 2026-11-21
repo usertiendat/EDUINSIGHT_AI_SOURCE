@@ -1,0 +1,224 @@
+"use client";
+
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  Activity, ArrowDownToLine, BarChart3, BookOpen, BrainCircuit,
+  CalendarDays, CheckCircle2, ChevronDown, CircleHelp, ClipboardList,
+  Database, GraduationCap, LayoutDashboard, Menu, RefreshCw,
+  Search, Settings, ShieldCheck, Sparkles, TrendingUp, Users, X,
+} from "lucide-react";
+import {
+  Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line,
+  LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
+} from "recharts";
+
+type Overview = {
+  total_students: number;
+  total_instructors: number;
+  total_courses: number;
+  total_classes: number;
+  total_enrollments: number;
+  average_grade: number | null;
+  attendance_rate: number | null;
+  assignment_submission_rate: number | null;
+};
+type Department = {
+  department_key: number;
+  department_code: string;
+  department_name: string;
+  total_students: number;
+  total_courses: number;
+  total_instructors: number;
+};
+type Semester = {
+  semester_key: number;
+  semester_code: string;
+  academic_year: string;
+  total_classes: number;
+  total_students: number;
+  total_enrollments: number;
+  average_grade: number | null;
+  attendance_rate: number | null;
+  assignment_submission_rate: number | null;
+};
+type Course = {
+  course_key: number;
+  course_code: string;
+  course_name: string;
+  department_name: string;
+  total_students: number;
+  total_enrollments: number;
+  average_grade: number | null;
+  attendance_rate: number | null;
+  assignment_submission_rate: number | null;
+};
+type DashboardData = {
+  overview: Overview;
+  departments: Department[];
+  semesters: Semester[];
+  courses: Course[];
+};
+
+const formatNum = (value: number) => new Intl.NumberFormat("vi-VN").format(value);
+const percent = (value: number | null) => value === null ? "—" : `${value.toLocaleString("vi-VN", { maximumFractionDigits: 2 })}%`;
+const score = (value: number | null) => value === null ? "—" : value.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const departmentLabel = (name: string) => ({
+  "Cong nghe thong tin": "Công nghệ thông tin",
+  "Kinh te": "Kinh tế",
+  "Ngoai ngu": "Ngoại ngữ",
+  "Ky thuat": "Kỹ thuật",
+  "Khoa hoc xa hoi": "Khoa học xã hội",
+} as Record<string, string>)[name] ?? name;
+
+function exportCourses(rows: Course[]) {
+  const headers = ["Mã học phần", "Tên học phần", "Khoa", "Lượt đăng ký", "Điểm TB", "Chuyên cần (%)", "Nộp bài (%)"];
+  const csvCell = (value: string | number | null) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+  const lines = [headers, ...rows.map((row) => [
+    row.course_code, row.course_name, row.department_name, row.total_enrollments,
+    row.average_grade, row.attendance_rate, row.assignment_submission_rate,
+  ])].map((cells) => cells.map(csvCell).join(","));
+  const blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "eduinsight-courses.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+export default function Home() {
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [year, setYear] = useState("all");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [insightOpen, setInsightOpen] = useState(false);
+  const [updatedAt, setUpdatedAt] = useState("");
+
+  async function loadDashboard() {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/dashboard", { cache: "no-store" });
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error || "Không thể tải dữ liệu");
+      setData(json as DashboardData);
+      setUpdatedAt(new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" }));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Lỗi không xác định");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => { void loadDashboard(); }, []);
+
+  const filteredSemesters = useMemo(() =>
+    (data?.semesters ?? []).filter((s) => year === "all" || s.semester_code.startsWith(year)),
+  [data, year]);
+  const filteredCourses = useMemo(() =>
+    (data?.courses ?? []).filter((c) =>
+      `${c.course_code} ${c.course_name} ${c.department_name}`.toLowerCase().includes(searchText.trim().toLowerCase()),
+    ),
+  [data, searchText]);
+  const chartDepartments = useMemo(() => (data?.departments ?? []).map((d) => ({
+    name: departmentLabel(d.department_name), students: d.total_students,
+  })), [data]);
+  const chartSemesters = useMemo(() => filteredSemesters.map((s) => ({
+    name: s.semester_code, grade: s.average_grade, attendance: s.attendance_rate,
+    submission: s.assignment_submission_rate, enrollments: s.total_enrollments,
+  })), [filteredSemesters]);
+  const leadingCourses = useMemo(() => [...filteredCourses]
+    .sort((a, b) => b.total_enrollments - a.total_enrollments)
+    .slice(0, 7).map((c) => ({
+      name: c.course_code, students: c.total_enrollments,
+    })), [filteredCourses]);
+
+  const navigation = [
+    { id: "overview", text: "Tổng quan", icon: LayoutDashboard },
+    { id: "departments", text: "Phân tích theo khoa", icon: Users },
+    { id: "semesters", text: "Phân tích học kỳ", icon: CalendarDays },
+    { id: "courses", text: "Học phần", icon: BookOpen },
+  ];
+
+  return (
+    <div className="app-frame">
+      <aside className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`}>
+        <div className="brand">
+          <span className="brand-icon"><GraduationCap size={22}/></span>
+          <div><strong>EduInsight <span>AI</span></strong><small>Education Intelligence</small></div>
+          <button className="mobile-close" aria-label="Đóng menu" onClick={() => setSidebarOpen(false)}><X size={18}/></button>
+        </div>
+        <div className="workspace"><span className="workspace-badge"><Sparkles size={16}/></span><span><strong>EduInsight Workspace</strong><small>University Analytics</small></span><ChevronDown size={14}/></div>
+        <div className="nav-caption">KHÔNG GIAN LÀM VIỆC</div>
+        <nav className="side-nav" aria-label="Điều hướng dashboard">
+          {navigation.map(({ id, text, icon: Icon }, index) => (
+            <a className={index === 0 ? "nav-link nav-active" : "nav-link"} href={`#${id}`} key={id} onClick={() => setSidebarOpen(false)}><Icon size={17}/>{text}</a>
+          ))}
+        </nav>
+        <div className="nav-caption nav-caption-second">HỆ THỐNG</div>
+        <div className="side-nav">
+          <a className="nav-link" href="#quality" onClick={() => setSidebarOpen(false)}><Database size={17}/>Nguồn dữ liệu</a>
+          <button className="nav-link" onClick={() => setInsightOpen(true)}><BrainCircuit size={17}/>AI Insights <span className="soon">Sắp có</span></button>
+        </div>
+        <div className="sidebar-bottom">
+          <div className="assistant-promo"><div className="promo-icon"><BrainCircuit size={22}/></div><strong>EduInsight AI Assistant</strong><p>Trợ lý phân tích dữ liệu học tập — sắp ra mắt.</p><button onClick={() => setInsightOpen(true)}>Tìm hiểu thêm <Sparkles size={14}/></button></div>
+          <div className="sidebar-footer"><ShieldCheck size={17}/> Dữ liệu giả lập • Development</div>
+        </div>
+      </aside>
+
+      {sidebarOpen && <button className="sidebar-overlay" aria-label="Đóng menu" onClick={() => setSidebarOpen(false)} />}
+
+      <main className="main-area" id="overview">
+        <header className="topbar">
+          <div className="topbar-left"><button className="menu-toggle" aria-label="Mở menu" onClick={() => setSidebarOpen(true)}><Menu size={22}/></button><div className="top-search"><Search size={17}/><input value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Tìm học phần, mã học phần, khoa..." aria-label="Tìm học phần"/></div></div>
+          <div className="topbar-right"><span className="environment-pill"><span className="status-dot"/> Development</span><div className="top-divider"/><span className="avatar">AD</span><div className="user-label"><strong>Admin Demo</strong><small>University Analyst</small></div><ChevronDown size={15} className="muted-icon"/></div>
+        </header>
+
+        <div className="dashboard-content">
+          <div className="page-heading"><div><p className="eyebrow">EDUINSIGHT AI / ANALYTICS</p><h1>Reports &amp; Analytics <span className="heading-stars">✦</span></h1><p className="page-subtitle">Tổng quan hiệu quả học tập và hoạt động đào tạo từ Data Warehouse.</p></div><div className="page-actions"><div className="year-filter"><button className={year === "all" ? "selected" : ""} onClick={() => setYear("all")}>Tất cả</button><button className={year === "2025" ? "selected" : ""} onClick={() => setYear("2025")}>2025</button><button className={year === "2026" ? "selected" : ""} onClick={() => setYear("2026")}>2026</button></div><button className="outline-button" onClick={() => void loadDashboard()} disabled={loading}><RefreshCw size={15} className={loading ? "spin" : ""}/> Làm mới</button><button className="primary-button" onClick={() => setInsightOpen(true)}><Sparkles size={15}/> AI Insights</button></div></div>
+
+          {error && <div className="error-alert"><CircleHelp size={18}/><span>{error}</span><button onClick={() => void loadDashboard()}>Thử lại</button></div>}
+          {loading && !data ? <div className="loading-box"><RefreshCw className="spin" size={28}/><span>Đang kết nối Data Warehouse...</span></div> : data && <>
+            <section className="kpi-grid" aria-label="Các chỉ số tổng quan">
+              <Kpi label="Tổng sinh viên" value={formatNum(data.overview.total_students)} note={`${formatNum(data.overview.total_enrollments)} lượt đăng ký`} icon={<Users size={22}/>} variant="blue"/>
+              <Kpi label="Điểm trung bình" value={`${score(data.overview.average_grade)} / 10`} note="Điểm quy đổi thang 10" icon={<GraduationCap size={22}/>} variant="green"/>
+              <Kpi label="Tỷ lệ hiện diện" value={percent(data.overview.attendance_rate)} note="Tính theo bản ghi điểm danh" icon={<CalendarDays size={22}/>} variant="violet"/>
+              <Kpi label="Tỷ lệ nộp bài" value={percent(data.overview.assignment_submission_rate)} note="Bao gồm bài nộp trễ" icon={<ClipboardList size={22}/>} variant="amber"/>
+            </section>
+
+            <div className="content-grid">
+              <div className="primary-column">
+                <div className="two-panel-row" id="departments">
+                  <section className="panel"><PanelHeader title="Sinh viên theo khoa" subtitle="Phân bố sinh viên hiện tại" icon={<Users size={18}/>} /><div className="chart-area"><ResponsiveContainer width="100%" height="100%"><BarChart data={chartDepartments} margin={{top:12,right:8,bottom:6,left:-18}}><CartesianGrid strokeDasharray="4 5" vertical={false} stroke="#edf1f8"/><XAxis dataKey="name" tick={{fontSize:10,fill:"#8190a8"}} interval={0} angle={-19} height={60}/><YAxis tick={{fontSize:11,fill:"#8190a8"}}/><Tooltip cursor={{fill:"#f5f8fe"}} formatter={(value) => [formatNum(Number(value)),"Sinh viên"]}/><Bar dataKey="students" fill="#3779f6" radius={[6,6,0,0]} barSize={34}/></BarChart></ResponsiveContainer></div></section>
+                  <section className="panel" id="semesters"><PanelHeader title="Kết quả theo học kỳ" subtitle="Điểm trung bình trên thang 10" icon={<TrendingUp size={18}/>} /><div className="chart-area"><ResponsiveContainer width="100%" height="100%"><AreaChart data={chartSemesters} margin={{top:12,right:14,bottom:8,left:-20}}><defs><linearGradient id="gradeFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#7163eb" stopOpacity={0.18}/><stop offset="95%" stopColor="#7163eb" stopOpacity={0}/></linearGradient></defs><CartesianGrid strokeDasharray="4 5" vertical={false} stroke="#edf1f8"/><XAxis dataKey="name" tick={{fontSize:11,fill:"#8190a8"}}/><YAxis domain={[0,10]} tick={{fontSize:11,fill:"#8190a8"}}/><Tooltip formatter={(value) => [score(Number(value)),"Điểm trung bình"]}/><Area type="monotone" dataKey="grade" stroke="#7163eb" strokeWidth={2.5} fill="url(#gradeFill)" activeDot={{r:5}}/></AreaChart></ResponsiveContainer></div></section>
+                </div>
+                <div className="two-panel-row">
+                  <section className="panel"><PanelHeader title="Chuyên cần & nộp bài" subtitle="Tỷ lệ (%) theo học kỳ" icon={<Activity size={18}/>} /><div className="chart-area"><ResponsiveContainer width="100%" height="100%"><LineChart data={chartSemesters} margin={{top:12,right:10,bottom:8,left:-18}}><CartesianGrid strokeDasharray="4 5" vertical={false} stroke="#edf1f8"/><XAxis dataKey="name" tick={{fontSize:11,fill:"#8190a8"}}/><YAxis domain={[0,100]} tick={{fontSize:11,fill:"#8190a8"}}/><Tooltip formatter={(value,name) => [`${value}%`,name === "attendance" ? "Chuyên cần" : "Nộp bài"]}/><Legend formatter={(value) => value === "attendance" ? "Chuyên cần" : "Nộp bài"}/><Line type="monotone" dataKey="attendance" stroke="#16b69a" strokeWidth={2.5} dot={{r:4}}/><Line type="monotone" dataKey="submission" stroke="#836cf4" strokeWidth={2.5} dot={{r:4}}/></LineChart></ResponsiveContainer></div></section>
+                  <section className="panel"><PanelHeader title="Học phần nổi bật" subtitle="Theo số lượt đăng ký" icon={<BookOpen size={18}/>} /><div className="chart-area"><ResponsiveContainer width="100%" height="100%"><BarChart data={leadingCourses} layout="vertical" margin={{top:10,right:24,bottom:8,left:0}}><CartesianGrid strokeDasharray="4 5" horizontal={false} stroke="#edf1f8"/><XAxis type="number" tick={{fontSize:11,fill:"#8190a8"}}/><YAxis dataKey="name" type="category" width={64} tick={{fontSize:11,fill:"#8190a8"}}/><Tooltip formatter={(value) => [formatNum(Number(value)),"Lượt đăng ký"]}/><Bar dataKey="students" fill="#17b8a6" barSize={15} radius={[0,5,5,0]}/></BarChart></ResponsiveContainer></div></section>
+                </div>
+                <section className="panel course-panel" id="courses"><div className="panel-heading"><div><h2><BookOpen size={18}/> Course Performance</h2><p>So sánh các học phần từ dữ liệu hiện có</p></div><button className="outline-button" onClick={() => exportCourses(filteredCourses)}><ArrowDownToLine size={15}/> Xuất CSV</button></div><div className="table-scroll"><table className="course-table"><thead><tr><th>Học phần</th><th>Khoa</th><th>Lượt ĐK</th><th>Điểm TB</th><th>Chuyên cần</th><th>Nộp bài</th></tr></thead><tbody>{filteredCourses.slice(0,12).map((course) => <tr key={course.course_key}><td><strong>{course.course_code}</strong><span className="table-subtitle">{course.course_name}</span></td><td>{departmentLabel(course.department_name)}</td><td>{formatNum(course.total_enrollments)}</td><td><span className="metric-grade">{score(course.average_grade)}</span></td><td><span className="metric-positive">{percent(course.attendance_rate)}</span></td><td>{percent(course.assignment_submission_rate)}</td></tr>)}</tbody></table>{filteredCourses.length === 0 && <p className="empty-results">Không tìm thấy học phần phù hợp.</p>}</div><div className="panel-bottom">Hiển thị {Math.min(12,filteredCourses.length)}/{filteredCourses.length} học phần · Tìm kiếm bằng ô phía trên để lọc kết quả</div></section>
+              </div>
+              <aside className="right-column">
+                <section className="panel summary-panel"><PanelHeader title="Report Summary" subtitle="Thông tin Data Warehouse" icon={<ClipboardList size={18}/>} /><div className="summary-item"><span className="summary-icon blue-light"><GraduationCap size={18}/></span><span><strong>{formatNum(data.overview.total_courses)} học phần</strong><small>{formatNum(data.overview.total_classes)} lớp học phần</small></span></div><div className="summary-item"><span className="summary-icon green-light"><Users size={18}/></span><span><strong>{formatNum(data.overview.total_instructors)} giảng viên</strong><small>{formatNum(data.overview.total_students)} sinh viên</small></span></div><div className="summary-item"><span className="summary-icon purple-light"><Database size={18}/></span><span><strong>PostgreSQL Warehouse</strong><small>4 nguồn API thống kê</small></span></div><div className="summary-item"><span className="summary-icon amber-light"><RefreshCw size={18}/></span><span><strong>Lần tải gần nhất</strong><small>{updatedAt || "Đang cập nhật"}</small></span></div></section>
+                <section className="panel quality-panel" id="quality"><PanelHeader title="Data Quality" subtitle="Trạng thái dữ liệu hiện tại" icon={<ShieldCheck size={18}/>} /><div className="quality-state"><CheckCircle2 size={21}/><span>Đã nhận dữ liệu Analytics</span></div><p>Thông tin hiển thị được lấy từ FastAPI kết nối PostgreSQL. Đây là dữ liệu sinh viên giả lập để kiểm thử.</p><div className="quality-metrics"><div><strong>{formatNum(data.departments.length)}</strong><span>Khoa</span></div><div><strong>{formatNum(data.semesters.length)}</strong><span>Học kỳ</span></div><div><strong>{formatNum(data.courses.length)}</strong><span>Học phần</span></div></div></section>
+                <section className="panel period-panel"><PanelHeader title="Semester Snapshot" subtitle="Thông tin các học kỳ" icon={<CalendarDays size={18}/>} />{filteredSemesters.map((semester) => <div className="period-item" key={semester.semester_key}><div><strong>{semester.semester_code}</strong><small>{semester.academic_year} · {semester.total_classes} lớp</small></div><div className="period-value"><strong>{formatNum(semester.total_enrollments)}</strong><small>Lượt đăng ký</small></div></div>)}{filteredSemesters.length === 0 && <p className="empty-results">Không có học kỳ.</p>}</section>
+                <section className="ai-panel"><div className="ai-panel-top"><span><Sparkles size={16}/> AI Insight</span><span className="beta-pill">Coming soon</span></div><h3>Trợ lý phân tích giáo dục</h3><p>Trong giai đoạn tiếp theo, chatbot sẽ sử dụng số liệu do backend cung cấp để hỗ trợ giải thích báo cáo.</p><button onClick={() => setInsightOpen(true)}>Khám phá kế hoạch <BrainCircuit size={16}/></button><div className="ai-orbit">✦</div></section>
+              </aside>
+            </div>
+            <div className="dashboard-footer"><span>© 2026 EduInsight AI · Synthetic education analytics</span><span>FastAPI + PostgreSQL + Next.js</span></div>
+          </>}
+        </div>
+      </main>
+      {insightOpen && <div className="modal-backdrop" role="presentation" onClick={() => setInsightOpen(false)}><div className="insight-dialog" role="dialog" aria-modal="true" aria-labelledby="insight-title" onClick={(e) => e.stopPropagation()}><button className="modal-close" aria-label="Đóng" onClick={() => setInsightOpen(false)}><X size={19}/></button><div className="dialog-illustration"><BrainCircuit size={28}/></div><h2 id="insight-title">AI Insights — sắp triển khai</h2><p>Giao diện Dashboard và các API Analytics đã sẵn sàng. Bước tiếp theo là kết nối AI Assistant với các kết quả phân tích được kiểm chứng từ backend.</p><button className="primary-button" onClick={() => setInsightOpen(false)}>Đã hiểu</button></div></div>}
+    </div>
+  );
+}
+
+function Kpi({label,value,note,icon,variant}: {label:string;value:string;note:string;icon:ReactNode;variant:string}) {
+  return <div className={`kpi-card kpi-${variant}`}><div className="kpi-top"><span>{label}</span><span className="kpi-icon">{icon}</span></div><strong>{value}</strong><small><TrendingUp size={13}/>{note}</small></div>;
+}
+function PanelHeader({title,subtitle,icon}: {title:string;subtitle:string;icon:ReactNode}) {
+  return <div className="panel-heading"><div><h2>{icon}{title}</h2><p>{subtitle}</p></div><span className="panel-more"><BarChart3 size={16}/></span></div>;
+}

@@ -1,0 +1,5 @@
+Khac phuc className="undefined": CSS Modules khong cho ra class map tren trang Students.
+1. Giai nen ZIP vao D:\EDUINSIGHT AI (ghi de 2 page.tsx va tao students.css).
+2. Khong can xoa students.module.css; file cu khong con duoc import.
+3. Restart npm run dev va tai lai /students, /students/SV000001.
+4. Khong thay doi FastAPI, PostgreSQL hay Dashboard.

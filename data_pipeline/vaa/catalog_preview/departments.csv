@@ -1,0 +1,9 @@
+﻿department_key,department_code,department_name,source_url,source_status
+1,FAC01,Khoa Công nghệ thông tin,https://vaa.edu.vn/chi-tiet-dang-bo/gioi-thieu-dang-bo-hoc-vien-hang-khong-viet-nam/,verified_name
+2,FAC02,Khoa Kinh tế Hàng không,https://www.ate.vaa.edu.vn/gi%E1%BB%9Bi-thi%E1%BB%87u/gi%E1%BB%9Bi-thi%E1%BB%87u-chung,verified_name
+3,FAC03,Khoa Khai thác Hàng không,https://vaa.edu.vn/chi-tiet-dang-bo/gioi-thieu-dang-bo-hoc-vien-hang-khong-viet-nam/,verified_name
+4,FAC04,Khoa Kỹ thuật Hàng không,https://vaa.edu.vn/chi-tiet-dang-bo/gioi-thieu-dang-bo-hoc-vien-hang-khong-viet-nam/,verified_name
+5,FAC05,Khoa Quản trị kinh doanh,https://fba.vaa.edu.vn/gioi-thieu-chung,verified_name
+6,FAC06,Khoa Du lịch và Dịch vụ Hàng không,https://ftas.vaa.edu.vn/lich-su-hinh-thanh-va-phat-trien,verified_name
+7,FAC07,Khoa Điện – Điện tử,https://vaa.edu.vn/chi-tiet-dang-bo/gioi-thieu-dang-bo-hoc-vien-hang-khong-viet-nam/,verified_name
+8,FAC08,Khoa Xây dựng,https://vaa.edu.vn/chi-tiet-dang-bo/gioi-thieu-dang-bo-hoc-vien-hang-khong-viet-nam/,verified_name

@@ -1,0 +1,13 @@
+﻿program_key,program_code,program_name,department_key,source_url,source_status,department_assignment
+1,PRG001,Công nghệ thông tin,1,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+2,PRG002,Quản lý hoạt động bay,3,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+3,PRG003,Kỹ thuật hàng không,4,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+4,PRG004,Quản trị kinh doanh,5,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+5,PRG005,Kinh tế vận tải,2,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+6,PRG006,Kinh doanh quốc tế,2,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+7,PRG007,Quản trị dịch vụ du lịch và lữ hành,6,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+8,PRG008,Quản trị nhân lực,5,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+9,PRG009,Công nghệ kỹ thuật điện tử – viễn thông,7,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+10,PRG010,Công nghệ kỹ thuật điều khiển và tự động hóa,7,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+11,PRG011,Công nghệ kỹ thuật công trình xây dựng,8,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only
+12,PRG012,Ngôn ngữ Anh,6,https://vaa.edu.vn/wp-content/uploads/2024/08/PTXT-HHK-20241.pdf,verified_name,demo_only

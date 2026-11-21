@@ -1,0 +1,32 @@
+/* Lecturer account security uses the same spacing and palette as the lecturer portal. */
+.lp-root .lp-security-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.lp-root .lp-security-panel{background:#fff;border:1px solid #e3eaf5;border-radius:16px;padding:24px;box-shadow:0 2px 14px #20355608;min-width:0}
+.lp-root .lp-security-password{grid-column:1/-1;max-width:850px;width:100%}
+.lp-root .lp-security-panel-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.lp-root .lp-security-icon{height:46px;width:46px;border-radius:13px;display:grid;place-items:center;background:#e8f0ff;color:#2465d8;flex-shrink:0}
+.lp-root .lp-security-icon-green{background:#e6f7f1;color:#0d9272}
+.lp-root .lp-security-icon-violet{background:#f1ebff;color:#7048d2}
+.lp-root .lp-security-panel-head h2{font-size:17px;color:#1c3553;margin:0 0 6px;line-height:1.3}
+.lp-root .lp-security-panel-head p{color:#71839f;font-size:12px;line-height:1.5;margin:0}
+.lp-root .lp-security-details{margin:0;display:grid;gap:0}
+.lp-root .lp-security-details>div{display:flex;justify-content:space-between;gap:16px;align-items:start;border-bottom:1px solid #edf1f8;padding:12px 0}
+.lp-root .lp-security-details>div:first-child{padding-top:0}
+.lp-root .lp-security-details>div:last-child{border-bottom:0}
+.lp-root .lp-security-details dt{font-size:13px;color:#75869d}
+.lp-root .lp-security-details dd{margin:0;font-size:13px;color:#193553;text-align:right;font-weight:700;overflow-wrap:anywhere}
+.lp-root .lp-security-tip{background:#f1f6ff;color:#3567ae;border-radius:10px;display:flex;gap:10px;padding:12px 14px;font-size:12px;line-height:1.6;margin-top:18px}
+.lp-root .lp-security-tip svg{flex-shrink:0}
+.lp-root .lp-security-subnote{color:#71839b;font-size:12px;line-height:1.65;margin:15px 0}
+.lp-root .lp-security-status{font-size:13px;color:#667b94}
+.lp-root .lp-security-error{background:#fff1f2;border:1px solid #fecdd3;color:#a9233b;border-radius:9px;padding:12px 14px;font-size:12px;line-height:1.5}
+.lp-root .lp-security-form{display:grid;gap:10px;max-width:600px}
+.lp-root .lp-security-form label{font-size:13px;color:#304967;font-weight:700;margin-top:5px}
+.lp-root .lp-security-form input{border:1px solid #d6e1f1;border-radius:10px;min-height:44px;width:100%;padding:10px 13px;font:inherit;font-size:14px;background:#fff;color:#153353}
+.lp-root .lp-security-form input:focus-visible{outline:3px solid #bfdbfe;outline-offset:1px}
+.lp-root .lp-security-primary,.lp-root .lp-security-secondary{min-height:44px;border-radius:10px;padding:11px 17px;display:inline-flex;justify-content:center;align-items:center;gap:9px;font-weight:750;font-size:13px;cursor:pointer}
+.lp-root .lp-security-primary{border:1px solid #2563eb;background:#2563eb;color:#fff;justify-self:start}
+.lp-root .lp-security-secondary{border:1px solid #d8e4f2;background:#f8fbff;color:#2458a9;margin-top:6px}
+.lp-root .lp-security-primary:hover{background:#1e50c0}.lp-root .lp-security-secondary:hover{background:#ebf3ff}
+.lp-root .lp-security-primary:disabled,.lp-root .lp-security-secondary:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:860px){.lp-root .lp-security-layout{grid-template-columns:1fr}.lp-root .lp-security-password{grid-column:auto}}
+@media(max-width:520px){.lp-root .lp-security-panel{padding:18px}.lp-root .lp-security-details>div{flex-direction:column;gap:5px}.lp-root .lp-security-details dd{text-align:left}}

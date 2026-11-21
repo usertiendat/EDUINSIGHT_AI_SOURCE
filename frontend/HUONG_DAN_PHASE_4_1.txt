@@ -1,0 +1,23 @@
+EDUINSIGHT AI — Phase 4.1 Course Management
+
+NỘI DUNG: 6 file frontend mới/sửa; không thay PostgreSQL hoặc FastAPI.
+YÊU CẦU: Unified UI đã cài, FastAPI tại http://127.0.0.1:8000, Next.js ở localhost:3000, 4 Analytics API sẵn có.
+
+CÀI ĐẶT (PowerShell):
+1. cd "D:\EDUINSIGHT AI"
+2. Copy-Item .\frontend\src\components\layout\app-shell.tsx "D:\app-shell-before-phase41.tsx"
+3. Expand-Archive -LiteralPath "D:\Download\EduInsight_Phase4_Course_Management.zip" -DestinationPath "D:\EDUINSIGHT AI\frontend" -Force
+4. cd frontend
+5. npm run dev (nếu đang chạy thì không cần chạy lần nữa)
+6. Truy cập http://localhost:3000/courses và http://localhost:3000/courses/CRS001
+7. Test http://localhost:3000/api/courses (phải thấy status=success và data có 60 học phần).
+
+CHỨC NĂNG:
+- Trang học phần: tìm kiếm, lọc khoa, sắp xếp, phân trang 10 dòng, xuất CSV theo bộ lọc.
+- Trang chi tiết: các chỉ số hiện có từ Course Analytics API, học phần liên quan cùng khoa.
+- Tái sử dụng AppShell của Unified UI, link Học phần trên sidebar giờ dẫn đến /courses.
+- Dữ liệu là synthetic. Không có danh sách lớp chi tiết vì API hiện tại mới cung cấp thống kê tổng hợp.
+
+KIỂM THỬ:
+- Lỗi khi không có FastAPI được hiện rõ và có nút Thử lại.
+- Kiểm thử giao diện thực tế trên Windows vẫn cần thực hiện. Không đưa lên Internet khi chưa có xác thực/RBAC.

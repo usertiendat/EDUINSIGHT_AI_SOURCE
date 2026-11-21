@@ -1,0 +1,61 @@
+﻿course_key,course_code,course_name,department_key,credits,source_status,source_url,department_assignment,course_code_status,credit_status
+1,CRS001,An toàn hàng không,2,2,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+2,CRS002,An toàn và bảo mật thông tin,1,3,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+3,CRS003,Aviation Law,5,2,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+4,CRS004,Bản đồ hàng không,3,2,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+5,CRS005,Bảo hiểm vận tải,2,2,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+6,CRS006,Các hệ thống trên tàu bay 1,4,4,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+7,CRS007,Các hoạt động khai thác tại Cảng HK,2,3,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+8,CRS008,Cấu trúc dữ liệu và thuật giải,1,3,verified_name,https://media.vaa.edu.vn/Media/2_SVVAA/FolderFunc/202403/Documents/danh-sach-cac-lhp-mo-trong-hoc-ky-iii-nam-hoc-2023-2024-20240309082943-e.pdf,documented_2024,demo_only,documented_2024
+9,CRS009,Quản trị học,5,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+10,CRS010,Pháp luật Hàng không,5,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+11,CRS011,Điện – điện tử tàu bay,4,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+12,CRS012,Động cơ turbine khí 1,4,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+13,CRS013,Động cơ turbine khí 2,4,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+14,CRS014,Quản trị thiết bị cảng hàng không,2,,verified_name,https://media.vaa.edu.vn/Media/SVVAA/FolderFunc/202205/Documents/5892022qdve-viec-bo-sung-hoc-phan-tu-chon-trong-cac-chuong-trinh-dao-tao-dai-hoc-cao-dang2321cc5b-d-e.pdf,demo_only,demo_only,keep_demo
+15,CRS015,Mô phỏng: Phân tích dữ liệu ứng dụng (015),1,,simulated,,demo_only,demo_only,keep_demo
+16,CRS016,Mô phỏng: Kinh tế vận tải (016),2,,simulated,,demo_only,demo_only,keep_demo
+17,CRS017,Mô phỏng: Quản lý hoạt động bay (017),3,,simulated,,demo_only,demo_only,keep_demo
+18,CRS018,Mô phỏng: Vật liệu kỹ thuật (018),4,,simulated,,demo_only,demo_only,keep_demo
+19,CRS019,Mô phỏng: Quản trị doanh nghiệp (019),5,,simulated,,demo_only,demo_only,keep_demo
+20,CRS020,Mô phỏng: Quản trị dịch vụ (020),6,,simulated,,demo_only,demo_only,keep_demo
+21,CRS021,Mô phỏng: Điện tử số (021),7,,simulated,,demo_only,demo_only,keep_demo
+22,CRS022,Mô phỏng: Kết cấu công trình (022),8,,simulated,,demo_only,demo_only,keep_demo
+23,CRS023,Mô phỏng: Hệ thống thông tin doanh nghiệp (023),1,,simulated,,demo_only,demo_only,keep_demo
+24,CRS024,Mô phỏng: Quản lý logistics (024),2,,simulated,,demo_only,demo_only,keep_demo
+25,CRS025,Mô phỏng: Khai thác sân bay (025),3,,simulated,,demo_only,demo_only,keep_demo
+26,CRS026,Mô phỏng: Bảo dưỡng tàu bay (026),4,,simulated,,demo_only,demo_only,keep_demo
+27,CRS027,Mô phỏng: Phân tích kinh doanh (027),5,,simulated,,demo_only,demo_only,keep_demo
+28,CRS028,Mô phỏng: Du lịch hàng không (028),6,,simulated,,demo_only,demo_only,keep_demo
+29,CRS029,Mô phỏng: Điều khiển tự động (029),7,,simulated,,demo_only,demo_only,keep_demo
+30,CRS030,Mô phỏng: Quản lý dự án xây dựng (030),8,,simulated,,demo_only,demo_only,keep_demo
+31,CRS031,Mô phỏng: Kỹ thuật phần mềm (031),1,,simulated,,demo_only,demo_only,keep_demo
+32,CRS032,Mô phỏng: Kinh doanh hàng không (032),2,,simulated,,demo_only,demo_only,keep_demo
+33,CRS033,Mô phỏng: Lập kế hoạch bay (033),3,,simulated,,demo_only,demo_only,keep_demo
+34,CRS034,Mô phỏng: Khí động học (034),4,,simulated,,demo_only,demo_only,keep_demo
+35,CRS035,Mô phỏng: Quản lý vận hành (035),5,,simulated,,demo_only,demo_only,keep_demo
+36,CRS036,Mô phỏng: Chăm sóc khách hàng (036),6,,simulated,,demo_only,demo_only,keep_demo
+37,CRS037,Mô phỏng: Hệ thống truyền thông (037),7,,simulated,,demo_only,demo_only,keep_demo
+38,CRS038,Mô phỏng: Hạ tầng giao thông (038),8,,simulated,,demo_only,demo_only,keep_demo
+39,CRS039,Mô phỏng: Cơ sở dữ liệu (039),1,,simulated,,demo_only,demo_only,keep_demo
+40,CRS040,Mô phỏng: Phân tích thị trường (040),2,,simulated,,demo_only,demo_only,keep_demo
+41,CRS041,Mô phỏng: Thông tin hàng không (041),3,,simulated,,demo_only,demo_only,keep_demo
+42,CRS042,Mô phỏng: Kết cấu hàng không (042),4,,simulated,,demo_only,demo_only,keep_demo
+43,CRS043,Mô phỏng: Lập kế hoạch chiến lược (043),5,,simulated,,demo_only,demo_only,keep_demo
+44,CRS044,Mô phỏng: Tổ chức sự kiện (044),6,,simulated,,demo_only,demo_only,keep_demo
+45,CRS045,Mô phỏng: Vi điều khiển (045),7,,simulated,,demo_only,demo_only,keep_demo
+46,CRS046,Mô phỏng: Vật liệu xây dựng (046),8,,simulated,,demo_only,demo_only,keep_demo
+47,CRS047,Mô phỏng: Phân tích dữ liệu ứng dụng (047),1,,simulated,,demo_only,demo_only,keep_demo
+48,CRS048,Mô phỏng: Kinh tế vận tải (048),2,,simulated,,demo_only,demo_only,keep_demo
+49,CRS049,Mô phỏng: Quản lý hoạt động bay (049),3,,simulated,,demo_only,demo_only,keep_demo
+50,CRS050,Mô phỏng: Vật liệu kỹ thuật (050),4,,simulated,,demo_only,demo_only,keep_demo
+51,CRS051,Mô phỏng: Quản trị doanh nghiệp (051),5,,simulated,,demo_only,demo_only,keep_demo
+52,CRS052,Mô phỏng: Quản trị dịch vụ (052),6,,simulated,,demo_only,demo_only,keep_demo
+53,CRS053,Mô phỏng: Điện tử số (053),7,,simulated,,demo_only,demo_only,keep_demo
+54,CRS054,Mô phỏng: Kết cấu công trình (054),8,,simulated,,demo_only,demo_only,keep_demo
+55,CRS055,Mô phỏng: Hệ thống thông tin doanh nghiệp (055),1,,simulated,,demo_only,demo_only,keep_demo
+56,CRS056,Mô phỏng: Quản lý logistics (056),2,,simulated,,demo_only,demo_only,keep_demo
+57,CRS057,Mô phỏng: Khai thác sân bay (057),3,,simulated,,demo_only,demo_only,keep_demo
+58,CRS058,Mô phỏng: Bảo dưỡng tàu bay (058),4,,simulated,,demo_only,demo_only,keep_demo
+59,CRS059,Mô phỏng: Phân tích kinh doanh (059),5,,simulated,,demo_only,demo_only,keep_demo
+60,CRS060,Mô phỏng: Du lịch hàng không (060),6,,simulated,,demo_only,demo_only,keep_demo
